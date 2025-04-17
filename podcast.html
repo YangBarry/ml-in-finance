@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="FA690 Machine Learning in Finance - Lecture Podcasts" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FA690 - Lecture Podcasts</title>
+  <style>
+    :root {
+      --bg-color: #fafafa;
+      --primary-color: #8B0000;
+      --accent-color: #333;
+      --text-color: #444;
+      --header-height: 60px;
+      --transition: all 0.3s ease;
+      --border-color: #e0e0e0;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    /* Header / Nav */
+    header {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    
+    .branding {
+      display: flex;
+      align-items: center;
+      padding: 1em 2em;
+      background: #fff;
+    }
+    
+    .branding img {
+      height: 45px;
+      margin-right: 1.5em;
+      transition: var(--transition);
+    }
+    
+    .branding img:hover {
+      transform: scale(1.05);
+    }
+    
+    .branding h1 {
+      font-size: 1.4rem;
+      margin: 0;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-color);
+      padding: 0.8em 2em;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 1.5em;
+    }
+    
+    nav ul li a {
+      text-decoration: none;
+      color: var(--accent-color);
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    nav ul li a:hover {
+      background: var(--primary-color);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* Main Content */
+    main {
+      max-width: 1200px;
+      margin: 2em auto;
+      padding: 0 2em;
+    }
+
+    /* Podcast Section */
+    .podcast-section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      margin-bottom: 2em;
+    }
+
+    .podcast-section h2 {
+      color: var(--primary-color);
+      margin-bottom: 1.5em;
+    }
+
+    /* Current Player Card */
+    .podcast-player-card {
+      background: var(--bg-color);
+      border-radius: 8px;
+      padding: 1.5em;
+      margin-bottom: 2em;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .track-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .track-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 4px;
+      background: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+    }
+
+    .track-icon svg {
+      width: 24px;
+      height: 24px;
+      color: white;
+    }
+
+    .track-details h3 {
+      margin: 0 0 4px;
+      font-size: 1.1rem;
+      color: var(--primary-color);
+    }
+
+    .track-details p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--accent-color);
+    }
+
+    /* Mini Player */
+    .mini-player {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      padding: 8px 0;
+    }
+    
+    .play-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin-right: 12px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .play-icon:hover {
+      transform: scale(1.05);
+    }
+    
+    .mini-progress {
+      flex: 1;
+      height: 4px;
+      background: #eee;
+      border-radius: 2px;
+      margin: 0 12px;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .mini-progress-fill {
+      position: absolute;
+      height: 100%;
+      background: var(--primary-color);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    .time-display {
+      font-size: 0.9em;
+      color: var(--accent-color);
+      min-width: 100px;
+      text-align: center;
+    }
+    
+    .control-icons {
+      display: flex;
+      gap: 15px;
+      margin-left: 12px;
+    }
+    
+    .control-icon {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    
+    .control-icon:hover {
+      opacity: 1;
+    }
+
+    /* Playlist */
+    .playlist {
+      margin-top: 2em;
+    }
+    
+    .playlist h3 {
+      color: var(--primary-color);
+      margin-bottom: 1em;
+    }
+    
+    .playlist-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: background-color 0.2s;
+      border-radius: 6px;
+    }
+    
+    .playlist-item:hover {
+      background-color: rgba(0,0,0,0.02);
+    }
+    
+    .playlist-item.active {
+      background-color: rgba(139, 0, 0, 0.05);
+    }
+    
+    .item-number {
+      width: 30px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--accent-color);
+    }
+    
+    .item-details {
+      flex: 1;
+      margin: 0 12px;
+    }
+    
+    .item-title {
+      font-weight: 500;
+      margin: 0 0 4px;
+      font-size: 1rem;
+      color: var(--primary-color);
+    }
+    
+    .item-description {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--accent-color);
+    }
+    
+    .item-duration {
+      font-size: 0.85rem;
+      color: var(--accent-color);
+      min-width: 60px;
+      text-align: right;
+    }
+
+    /* Volume Control */
+    .volume-control {
+      position: relative;
+    }
+
+    .volume-slider-container {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 15px 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      display: none;
+      width: 36px;
+      height: 100px;
+      margin-bottom: 10px;
+      z-index: 10;
+    }
+
+    .volume-slider-container.active {
+      display: block;
+    }
+
+    .volume-slider {
+      -webkit-appearance: none;
+      width: 100px;
+      height: 4px;
+      border-radius: 2px;
+      background: #eee;
+      outline: none;
+      transform: rotate(-90deg) translateX(-50px);
+      transform-origin: left;
+      position: absolute;
+      left: 18px;
+      top: 60px;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      cursor: pointer;
+    }
+
+    .volume-slider::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      cursor: pointer;
+      border: none;
+    }
+
+    .volume-slider-container::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid white;
+    }
+
+    .volume-icon.muted svg path:last-child,
+    .volume-icon.muted svg path:nth-last-child(2) {
+      display: none;
+    }
+
+    /* Footer */
+    footer {
+      background: #fff;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      padding: 2em;
+      text-align: center;
+      margin-top: 4em;
+    }
+    
+    .disclaimer {
+      margin-top: 1em;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .branding {
+        padding: 1em;
+      }
+      
+      nav {
+        padding: 0.8em 1em;
+      }
+      
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 1em;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      }
+      
+      nav ul.active {
+        display: flex;
+      }
+      
+      .hamburger {
+        display: block;
+      }
+      
+      .time-display {
+        min-width: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="branding">
+      <img src="images/stevens-logo.png" alt="Stevens Logo"/>
+      <h1>FA690 Machine Learning in Finance</h1>
+    </div>
+    <nav id="mainNav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="course.html">Course</a></li>
+        <li><a href="podcast.html">Podcast</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="podcast-section">
+      
+      <!-- Current playing podcast -->
+      <div class="podcast-player-card">
+        <div class="track-info">
+          <div class="track-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+              <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+            </svg>
+          </div>
+          <div class="track-details">
+            <h3 id="current-track-title">Week 1: Introduction to Machine Learning in Finance</h3>
+            <p id="current-track-description">ML Basics, Financial Applications</p>
+          </div>
+        </div>
+        
+        <!-- Single Audio Player -->
+        <div id="audioPlayer" class="mini-player">
+          <div id="playBtn" class="play-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </div>
+          
+          <span id="timeDisplay" class="time-display">0:00 / 0:00</span>
+          
+          <div id="progressBar" class="mini-progress">
+            <div id="progressFill" class="mini-progress-fill"></div>
+          </div>
+          
+          <div class="control-icons">
+            <div class="volume-control">
+              <div id="volumeBtn" class="control-icon volume-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                </svg>
+              </div>
+              <div class="volume-slider-container">
+                <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="100">
+              </div>
+            </div>
+            
+            <div id="downloadBtn" class="control-icon download-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Audio element hidden -->
+        <audio id="audio" style="display: none;"></audio>
+      </div>
+      
+      <!-- Playlist Section -->
+      <div class="playlist">
+        <h3>All Podcasts</h3>
+        
+        <div class="playlist-item active" data-audio="podcasts/1. Introduction.wav" data-audio-fallback="podcasts/1. Introduction.mp3">
+          <div class="item-number">1</div>
+          <div class="item-details">
+            <p class="item-title">Week 1: Introduction to Machine Learning in Finance</p>
+            <p class="item-description">ML Basics, Financial Applications</p>
+          </div>
+          <div class="item-duration">--:--</div>
+        </div>
+        
+        <div class="playlist-item" data-audio="podcasts/2. Review of Statistical Learning.wav" data-audio-fallback="podcasts/2. Review of Statistical Learning.mp3">
+          <div class="item-number">2</div>
+          <div class="item-details">
+            <p class="item-title">Week 2: Review of Statistical Learning</p>
+            <p class="item-description">Regression, Classification, Cross-Validation, Model Evaluation</p>
+          </div>
+          <div class="item-duration">--:--</div>
+        </div>
+        
+        <!-- Add more playlist items for additional lectures -->
+      </div>
+      <p style="margin: 2em 0; color: var(--accent-color); font-style: italic;">
+        These lecture podcasts are AI-generated using NotebookLM based on the course lecture notes, providing an alternative way to engage with the course material.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Stevens Institute of Technology</p>
+    <p class="disclaimer">
+      This site is publicly accessible and is for educational purposes only.
+    </p>
+  </footer>
+
+  <script>
+    // Toggle mobile menu
+    function toggleMenu() {
+      const navUl = document.querySelector('#mainNav ul');
+      navUl.classList.toggle('active');
+    }
+
+    // Audio Player functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      // DOM Elements
+      const audio = document.getElementById('audio');
+      const playButton = document.getElementById('playBtn');
+      const progressBar = document.getElementById('progressBar');
+      const progressFill = document.getElementById('progressFill');
+      const timeDisplay = document.getElementById('timeDisplay');
+      const volumeBtn = document.getElementById('volumeBtn');
+      const volumeSlider = document.getElementById('volumeSlider');
+      const volumeSliderContainer = document.querySelector('.volume-slider-container');
+      const downloadBtn = document.getElementById('downloadBtn');
+      const playlistItems = document.querySelectorAll('.playlist-item');
+      const currentTrackTitle = document.getElementById('current-track-title');
+      const currentTrackDescription = document.getElementById('current-track-description');
+      
+      // Audio state
+      let isPlaying = false;
+      let currentTrack = null;
+      let previousVolume = 1;
+      
+      // Initialize with the first track
+      const firstTrack = playlistItems[0];
+      setActiveTrack(firstTrack);
+      
+      // Set up the audio source for the first track
+      setAudioSource(firstTrack);
+      
+      // Functions
+      function setAudioSource(trackElement) {
+        const mainSource = trackElement.getAttribute('data-audio');
+        const fallbackSource = trackElement.getAttribute('data-audio-fallback');
+        
+        // Try the main source first
+        audio.src = mainSource;
+        
+        // If main source fails, use fallback
+        audio.addEventListener('error', function handleError() {
+          console.log('Primary audio source failed, trying fallback');
+          audio.src = fallbackSource;
+          // Remove the event listener to prevent multiple attachments
+          audio.removeEventListener('error', handleError);
+        });
+        
+        // Update the download button href
+        currentTrack = trackElement;
+      }
+      
+      function setActiveTrack(trackElement) {
+        // Remove active class from all playlist items
+        playlistItems.forEach(item => {
+          item.classList.remove('active');
+        });
+        
+        // Add active class to clicked item
+        trackElement.classList.add('active');
+        
+        // Update player display information
+        const title = trackElement.querySelector('.item-title').textContent;
+        const description = trackElement.querySelector('.item-description').textContent;
+        
+        currentTrackTitle.textContent = title;
+        currentTrackDescription.textContent = description;
+        
+        // Reset progress
+        progressFill.style.width = '0%';
+        // Don't set timeDisplay here as we'll update it once audio metadata is loaded
+      }
+      
+      // Add metadata loaded event listener to audio element
+      audio.addEventListener('loadedmetadata', () => {
+        const totalMinutes = Math.floor(audio.duration / 60);
+        const totalSeconds = Math.floor(audio.duration % 60);
+        const formattedDuration = `${totalMinutes}:${totalSeconds.toString().padStart(2, '0')}`;
+        
+        // Update the duration display in both the player and playlist item
+        timeDisplay.textContent = `0:00 / ${formattedDuration}`;
+        
+        // Update the duration attribute of the current track in the playlist
+        if (currentTrack) {
+          currentTrack.setAttribute('data-duration', formattedDuration);
+          currentTrack.querySelector('.item-duration').textContent = formattedDuration;
+        }
+      });
+      
+      // Play/Pause Toggle
+      playButton.addEventListener('click', async () => {
+        try {
+          if (isPlaying) {
+            await audio.pause();
+            playButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`;
+          } else {
+            // Add a loading state
+            playButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="6" x2="12" y2="12"/></svg>`;
+            
+            try {
+              await audio.play();
+              playButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>`;
+            } catch (error) {
+              console.error('Error playing audio:', error);
+              playButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`;
+              alert('Error playing audio. Please check if the file exists and try again.');
+              return;
+            }
+          }
+          isPlaying = !isPlaying;
+        } catch (error) {
+          console.error('Error toggling audio:', error);
+        }
+      });
+      
+      // Update progress and time display
+      audio.addEventListener('timeupdate', () => {
+        if (!audio.duration) return;
+        
+        const percent = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = `${percent}%`;
+        
+        const currentMinutes = Math.floor(audio.currentTime / 60);
+        const currentSeconds = Math.floor(audio.currentTime % 60);
+        const formattedCurrentTime = `${currentMinutes}:${currentSeconds.toString().padStart(2, '0')}`;
+        
+        // Get the duration from the active track
+        const duration = document.querySelector('.playlist-item.active').getAttribute('data-duration');
+        
+        timeDisplay.textContent = `${formattedCurrentTime} / ${duration}`;
+      });
+      
+      // Seek functionality
+      progressBar.addEventListener('click', (e) => {
+        if (!audio.duration) return; // Don't seek if audio isn't loaded
+        
+        const rect = e.target.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = percent * audio.duration;
+      });
+      
+      // Download functionality
+      downloadBtn.addEventListener('click', () => {
+        if (!currentTrack) return;
+        
+        const link = document.createElement('a');
+        link.href = currentTrack.getAttribute('data-audio');
+        link.download = '';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+      
+      // Volume control
+      volumeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        volumeSliderContainer.classList.toggle('active');
+        
+        // Toggle mute on double click
+        if (e.detail === 2) {
+          if (audio.volume > 0) {
+            previousVolume = audio.volume;
+            audio.volume = 0;
+            volumeSlider.value = 0;
+            volumeBtn.classList.add('muted');
+          } else {
+            audio.volume = previousVolume;
+            volumeSlider.value = previousVolume * 100;
+            volumeBtn.classList.remove('muted');
+          }
+        }
+      });
+      
+      // Hide volume slider when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!volumeBtn.contains(e.target) && !volumeSliderContainer.contains(e.target)) {
+          volumeSliderContainer.classList.remove('active');
+        }
+      });
+      
+      // Volume slider control
+      volumeSlider.addEventListener('input', (e) => {
+        const value = e.target.value / 100;
+        audio.volume = value;
+        previousVolume = value; // Store the previous volume
+        
+        if (value === 0) {
+          volumeBtn.classList.add('muted');
+        } else {
+          volumeBtn.classList.remove('muted');
+        }
+      });
+      
+      // Initialize volume
+      audio.volume = volumeSlider.value / 100;
+      previousVolume = audio.volume;
+      
+      // Playlist item click handler
+      playlistItems.forEach(item => {
+        item.addEventListener('click', () => {
+          // Check if this is already the active track
+          if (item.classList.contains('active')) {
+            // Just toggle play/pause
+            playButton.click();
+            return;
+          }
+          
+          // Update the active track
+          setActiveTrack(item);
+          
+          // Set the new audio source
+          setAudioSource(item);
+          
+          // Reset progress
+          progressFill.style.width = '0%';
+          
+          // If it was playing, continue playing the new track
+          if (isPlaying) {
+            isPlaying = false; // Reset state before clicking
+            playButton.click(); // Start playing the new track
+          } else {
+            // Update play button to play icon
+            playButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`;
+          }
+        });
+      });
+      
+      // Handle audio ending - auto play next track
+      audio.addEventListener('ended', () => {
+        const activeTrack = document.querySelector('.playlist-item.active');
+        const nextTrack = activeTrack.nextElementSibling;
+        
+        if (nextTrack && nextTrack.classList.contains('playlist-item')) {
+          nextTrack.click(); // Click the next track to play it
+        } else {
+          // If it's the last track, just reset the current one
+          isPlaying = true; // Set to true so it will be toggled to false
+          playButton.click(); // This will pause and reset the play button
+        }
+      });
+    });
+  </script>
+</body>
+</html>
