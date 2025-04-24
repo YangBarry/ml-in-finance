@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="FA690 Machine Learning in Finance - Home Page" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="images/lecturer.png">
+  <title>FA690 - Home</title>
+  <style>
+    :root {
+      --bg-color: #fafafa;
+      --primary-color: #8B0000;
+      --accent-color: #333;
+      --text-color: #444;
+      --header-height: 60px;
+      --transition: all 0.3s ease;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    /* Header / Nav */
+    header {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    
+    .branding {
+      display: flex;
+      align-items: center;
+      padding: 1em 2em;
+      background: #fff;
+    }
+    
+    .branding img {
+      height: 45px;
+      margin-right: 1.5em;
+      transition: var(--transition);
+    }
+    
+    .branding img:hover {
+      transform: scale(1.05);
+    }
+    
+    .branding h1 {
+      font-size: 1.4rem;
+      margin: 0;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-color);
+      padding: 0.8em 2em;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 1.5em;
+    }
+    
+    nav ul li a {
+      text-decoration: none;
+      color: var(--accent-color);
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    nav ul li a:hover {
+      background: var(--primary-color);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* Main Content */
+    main {
+      max-width: 1200px;
+      margin: 2em auto;
+      padding: 0 2em;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 4em 2em;
+      background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
+      border-radius: 12px;
+      margin-bottom: 3em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5em;
+      color: var(--primary-color);
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--accent-color);
+      max-width: 600px;
+      margin: 1em auto;
+    }
+
+    /* Key Features Grid */
+    .key-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2em;
+      margin: 3em 0;
+    }
+    
+    .feature-card {
+      background: #fff;
+      padding: 1.5em;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: var(--transition);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    
+    .feature-card h3 {
+      color: var(--primary-color);
+      margin-top: 0;
+    }
+
+    /* Course Description */
+    .course-description {
+      background: #fff;
+      border-radius: 12px;
+      padding: 3em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      margin: 3em 0;
+    }
+    
+    .course-description h2 {
+      color: var(--primary-color);
+      margin-top: 0;
+      font-size: 2rem;
+    }
+    
+    .course-description p {
+      margin-bottom: 1.5em;
+      font-size: 1.1rem;
+    }
+
+    /* Video Section */
+    .video-section {
+      margin: 3em 0;
+      text-align: center;
+    }
+    
+    .video-section video {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    /* Hide video progress bar */
+    .video-section video::-webkit-media-controls-timeline {
+      display: none !important;
+    }
+    
+    .video-section video::-moz-range-track {
+      display: none !important;
+    }
+
+    /* Instructor Section */
+    .instructor-highlight {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2em;
+      background: #fff;
+      border-radius: 12px;
+      padding: 2em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      align-items: center;
+      margin-bottom: 3em;  
+    }
+
+    /* ChatBot Section */
+    .chatbot-section {
+      grid-template-columns: 1fr auto;
+      margin-bottom: 3em;  
+    }
+    
+    .instructor-highlight a {
+      display: block;
+      text-decoration: none;
+    }
+
+    .instructor-highlight img {
+      width: 180px;
+      border-radius: 50%;  /* Changed from 12px to 50% for circular shape */
+      transition: var(--transition);
+    }
+    
+    .instructor-highlight img:hover {
+      transform: scale(1.05);
+    }
+    
+    .instructor-info h3 {
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      margin-top: 0;
+    }
+    
+    .instructor-info p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* Footer */
+    footer {
+      background: #fff;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      padding: 2em;
+      text-align: center;
+      margin-top: 4em;
+    }
+    
+    .disclaimer {
+      margin-top: 1em;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .branding {
+        padding: 1em;
+      }
+      
+      nav {
+        padding: 0.8em 1em;
+      }
+      
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 1em;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      }
+      
+      nav ul.active {
+        display: flex;
+      }
+      
+      .hamburger {
+        display: block;
+      }
+      
+      .hero {
+        padding: 2em 1em;
+      }
+      
+      .hero h2 {
+        font-size: 2rem;
+      }
+      
+      .instructor-highlight {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .instructor-highlight img {
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="branding">
+      <img src="images/stevens-logo.png" alt="Stevens Logo"/>
+      <h1>FA690 Machine Learning in Finance</h1>
+    </div>
+    <nav id="mainNav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="course.html">Course</a></li>
+        <li><a href="podcast.html">Podcast</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Welcome to Machine Learning in Finance</h2>
+      <p>Explore cutting-edge methods in Computer Vision, Natural Language Processing, and Generative AI for real-world financial applications.</p>
+    </section>
+
+    <section class="key-features">
+      <div class="feature-card">
+        <h3>Deep Learning</h3>
+        <p>Master CNNs, RNNs, and LSTM networks for financial applications</p>
+      </div>
+      <div class="feature-card">
+        <h3>Lecture Podcast</h3>
+        <p>Listen to AI-generated podcast for every lecture</p>
+      </div>
+      <div class="feature-card">
+        <h3>Latest Technologies</h3>
+        <p>Learn to leverage LLMs and advanced AI tools in finance and beyond</p>
+      </div>
+    </section>
+
+    <section class="instructor-highlight">
+      <a href="https://sites.google.com/view/zonghaoyang/home" target="_blank">
+        <img src="images/instructor.png" alt="Dr. Zonghao Yang" />
+      </a>
+      <div class="instructor-info">
+        <h3>Meet Your Instructor</h3>
+        <p>
+          Dr. Zonghao Yang is a Tenure-Track Assistant Professor in FinTech at Stevens Institute of Technology's School of Business. With a PhD in Data Science from the City University of Hong Kong, his research focuses on financial technology and applied machine learning.
+        </p>
+      </div>
+    </section>
+
+    <section class="instructor-highlight chatbot-section">
+      <div class="instructor-info">
+        <h3>Chat with FA690 ChatBot</h3>
+        <p>
+          FA690 ChatBot is a customized GPT designed to help answer questions related to FA690 Machine Learning in Finance. The responses may occasionally be incorrect; always verify answers with official course materials (e.g., syllabus).        
+        </p>
+      </div>
+      <a href="https://chatgpt.com/g/g-680a45c3245081918b3bf9d92b5d3247-fa690-chatbot" target="_blank">
+        <img src="images/lecturer.png" alt="FA690 ChatBot" />
+      </a>
+    </section>
+  
+    <section class="video-section">
+      <video autoplay muted loop>
+        <source src="images/whisk_live_discussion.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Stevens Institute of Technology</p>
+    <p class="disclaimer">
+      This site is publicly accessible and is for educational purposes only.
+    </p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const navUl = document.querySelector('#mainNav ul');
+      navUl.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

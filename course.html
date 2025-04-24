@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="FA690 Machine Learning in Finance - Course Information" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="images/lecturer.png">
+  <title>FA690 - Course</title>
+  <style>
+    :root {
+      --bg-color: #fafafa;
+      --primary-color: #8B0000;
+      --accent-color: #333;
+      --text-color: #444;
+      --header-height: 60px;
+      --transition: all 0.3s ease;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    /* Header / Nav */
+    header {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    
+    .branding {
+      display: flex;
+      align-items: center;
+      padding: 1em 2em;
+      background: #fff;
+    }
+    
+    .branding img {
+      height: 45px;
+      margin-right: 1.5em;
+      transition: var(--transition);
+    }
+    
+    .branding img:hover {
+      transform: scale(1.05);
+    }
+    
+    .branding h1 {
+      font-size: 1.4rem;
+      margin: 0;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    /* Styles for both note and podcast links */
+    .note-link, .podcast-link {
+      text-decoration: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      position: relative;
+      margin-right: 8px; /* Add space between emojis */
+    }
+
+    .note-link:hover::after {
+      content: "Lecture Note";
+      position: absolute;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 100%;
+      margin-bottom: 5px;
+      pointer-events: none;
+    }
+
+    .podcast-link:hover::after {
+      content: "Podcast";
+      position: absolute;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 100%;
+      margin-bottom: 5px;
+      pointer-events: none;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-color);
+      padding: 0.8em 2em;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 1.5em;
+    }
+    
+    nav ul li a {
+      text-decoration: none;
+      color: var(--accent-color);
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    nav ul li a:hover {
+      background: var(--primary-color);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* Main Content */
+    main {
+      max-width: 1200px;
+      margin: 2em auto;
+      padding: 0 2em;
+    }
+
+    /* Course Info Section */
+    .course-info {
+      background: #fff;
+      border-radius: 12px;
+      padding: 3em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      margin-bottom: 3em;
+    }
+    
+    .course-info h2 {
+      color: var(--primary-color);
+      margin-top: 0;
+      font-size: 2rem;
+    }
+    
+    .course-info p {
+      margin-bottom: 1.5em;
+      font-size: 1.1rem;
+    }
+
+    /* Schedule Section */
+    .schedule-section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 3em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      margin-bottom: 3em;
+    }
+    
+    .schedule-section h2 {
+      color: var(--primary-color);
+      margin-top: 0;
+      font-size: 2rem;
+    }
+
+    .module-section {
+      margin-bottom: 2em;
+      padding-bottom: 2em;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .module-section:last-child {
+      border-bottom: none;
+    }
+    
+    .module-content h3 {
+      color: var(--primary-color);
+      margin-top: 0;
+    }
+
+    /* Week Table */
+    .week-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2em 0;
+    }
+    
+    .week-table th,
+    .week-table td {
+      padding: 0.8em;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .week-table th {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: left;
+    }
+    
+    .week-table tr:hover {
+      background-color: rgba(0,0,0,0.02);
+    }
+
+    /* Add these new styles for column widths */
+    .week-table th:nth-child(1),
+    .week-table td:nth-child(1) {
+      width: 10%;  /* 1 part */
+    }
+
+    .week-table th:nth-child(2),
+    .week-table td:nth-child(2) {
+      width: 70%;  /* 7 parts */
+    }
+
+    .week-table th:nth-child(3),
+    .week-table td:nth-child(3) {
+      width: 20%;  /* 2 parts */
+    }
+
+    /* Audio Player - Improved */
+    .audio-player {
+      margin: 0.8em 0;
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 8px 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      position: relative;
+    }
+    
+    audio {
+      width: 100%;
+      height: 36px;
+      outline: none;
+    }
+    
+    /* Custom audio controls */
+    audio::-webkit-media-controls-panel {
+      background-color: transparent;
+    }
+    
+    audio::-webkit-media-controls-play-button {
+      background-color: var(--primary-color);
+      border-radius: 50%;
+      transform: scale(1.2);
+    }
+    
+    .podcast-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 5px;
+    }
+    
+    .download-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: var(--transition);
+      margin-left: auto;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+    
+    .download-link:hover {
+      background-color: rgba(139, 0, 0, 0.1);
+    }
+    
+    .download-icon {
+      width: 18px;
+      height: 18px;
+      fill: var(--primary-color);
+    }
+
+    /* Textbook Section */
+    .textbook-section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 3em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      margin-bottom: 3em;
+    }
+    
+    .textbook-section h2 {
+      color: var(--primary-color);
+      margin-top: 0;
+      font-size: 2rem;
+    }
+    
+    .textbook-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2em;
+      margin-top: 2em;
+    }
+    
+    .textbook-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: var(--transition);
+      background: white;
+    }
+    
+    .textbook-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    
+    .textbook-cover {
+      width: 170px;
+      height: 240px;
+      border-radius: 0;
+      padding: 0;
+      border: none;
+      object-fit: contain;
+      background-color: transparent;
+    }
+    
+    .textbook-info {
+      margin-top: 1.5em;
+      text-align: center;
+    }
+    
+    .textbook-info h3 {
+      color: var(--primary-color);
+      margin-top: 0;
+      margin-bottom: 0.5em;
+      font-size: 1.4rem;
+    }
+    
+    .textbook-info p {
+      margin-bottom: 0.5em;
+      line-height: 1.4;
+    }
+    
+    .textbook-link {
+      display: inline-block;
+      margin-top: 1em;
+      padding: 0.5em 1.5em;
+      background-color: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+    
+    .textbook-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Resources Section */
+    .resources-section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 3em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    
+    .resources-section h2 {
+      color: var(--primary-color);
+      margin-top: 0;
+      font-size: 2rem;
+    }
+    
+    .tag-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5em;
+      margin-bottom: 2em;
+    }
+    
+    .tag {
+      background: var(--bg-color);
+      padding: 0.4em 1em;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .tag:hover, .tag.active {
+      background: var(--primary-color);
+      color: white;
+    }
+    
+    .resource-item {
+      padding: 1em 0;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .resource-item:last-child {
+      border-bottom: none;
+    }
+    
+    .resource-item a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    .resource-item a:hover {
+      text-decoration: underline;
+    }
+    
+    .resource-tags {
+      display: flex;
+      gap: 0.5em;
+      margin-top: 0.5em;
+    }
+    
+    .resource-tag {
+      font-size: 0.8rem;
+      background: var(--bg-color);
+      padding: 0.2em 0.6em;
+      border-radius: 30px;
+    }
+
+    /* Footer */
+    footer {
+      background: #fff;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      padding: 2em;
+      text-align: center;
+      margin-top: 4em;
+    }
+    
+    .disclaimer {
+      margin-top: 1em;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .branding {
+        padding: 1em;
+      }
+      
+      nav {
+        padding: 0.8em 1em;
+      }
+      
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 1em;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      }
+      
+      nav ul.active {
+        display: flex;
+      }
+      
+      .hamburger {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="branding">
+      <img src="images/stevens-logo.png" alt="Stevens Logo"/>
+      <h1>FA690 Machine Learning in Finance</h1>
+    </div>
+    <nav id="mainNav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="course.html">Course</a></li>
+        <li><a href="podcast.html">Podcast</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="course-info">
+      <h2>About the Course</h2>
+      <p>
+        FA690 Machine Learning in Finance is an advanced course that delves into the cutting-edge techniques of machine learning with a specific focus on their applications in finance. 
+        Expanding upon foundational statistical learning methods, the course covers deep learning architectures such as convolutional neural networks (CNNs) 
+        and recurrent neural networks (RNNs), including long short-term memory (LSTM) networks. The course will also address recent advancements in 
+        large language models (LLMs) and their integration into agent workflows and decision-making processes in the finance industry.
+      </p>
+    </section>
+
+    <section class="schedule-section">
+      <h2>Course Schedule</h2>
+      
+      <div class="module-section" style="border-bottom: none;">
+        <div class="module-content">
+          <h3>Introduction</h3>
+          
+          <table class="week-table">
+            <tr>
+              <th>Week</th>
+              <th>Topic</th>
+              <th>Materials</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Introduction to Machine Learning</td>
+              <td>
+                <a href="https://drive.google.com/file/d/1PZqv1gFBZfMvmRgZrFqcH9sWdKSqWFRZ/view?usp=sharing" target="_blank" class="note-link">📝</a>
+                <a href="https://drive.google.com/file/d/1_mAGOHlN-pa9uSk5Km2LdfSovlFoE0Ar/view?usp=sharing" target="_blank" class="podcast-link">🎙️</a>            </tr>
+            <tr>
+              <td>2</td>
+              <td>Review of Statistical Learning</td>
+              <td>
+                <a href="https://drive.google.com/file/d/1mf8cl86bot8_o9v4BrYZKxiIWZkaV_Sj/view?usp=sharing" target="_blank" class="note-link">📝</a>
+                <a href="https://drive.google.com/file/d/1Kpjn3Rc_XPcqQDAzPpL1XiefUiVJcdil/view?usp=sharing" target="_blank" class="podcast-link">🎙️</a>            </tr>
+            <tr>
+              <td>3</td>
+              <td>Neural Networks Basics</td>
+              <td>
+                <a href="https://drive.google.com/file/d/16QdRPmpYsF8PHJvXh7vxvd14Wtno9K4J/view?usp=sharing" target="_blank" class="note-link">📝</a>
+                <a href="https://drive.google.com/file/d/1FT9zKlaFPKybKrmE2WfsSI9Yph4RUPvA/view?usp=sharing" target="_blank" class="podcast-link">🎙️</a>            </tr>
+          </table>
+        </div>
+      </div>
+      
+      <div class="module-section" style="border-bottom: none;">
+        <div class="module-content">
+          <h3>Computer Vision</h3>
+          
+          <table class="week-table">
+            <tr>
+              <th>Week</th>
+              <th>Topic</th>
+              <th>Materials</th>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Convolutional Neural Networks</td>
+              <td>
+                <a href="https://drive.google.com/file/d/1xO8r5oXvOQbi43w54X7hIRtsT5X1oTTW/view?usp=sharing" target="_blank" class="note-link">📝</a>
+                <a href="https://drive.google.com/file/d/1LoqkoEOPRTiH8xgKYv7PZDyzXZMfN0fc/view?usp=sharing" target="_blank" class="podcast-link">🎙️</a>            </tr>
+            <tr>
+              <td>5</td>
+              <td>Computer Vision in Finance</td>
+              <td>
+                <a href="https://drive.google.com/file/d/1Ppi0mv15QlI4IZ4-8nzRzayJl8Pfu721/view?usp=sharing" target="_blank" class="note-link">📝</a>
+                <a href="https://drive.google.com/file/d/1MJZj58OQ1Qe7UR_J_sY1CHSxpsyQ4iZ7/view?usp=sharing" target="_blank" class="podcast-link">🎙️</a>            </tr>
+          </table>
+        </div>
+      </div>
+      
+      <div class="module-section" style="border-bottom: none;">
+        <div class="module-content">
+          <h3>Natural Language Processing</h3>
+          
+          <table class="week-table">
+            <tr>
+              <th>Week</th>
+              <th>Topic</th>
+              <th>Materials</th>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Word Embedding</td>
+              <td>
+                <a href="https://drive.google.com/file/d/1oS_wKY5LWrncuS4Uys01ftpg8q0Q7eFk/view?usp=sharing" target="_blank" class="note-link">📝</a>
+                <a href="https://drive.google.com/file/d/1PqGk1SeR-MWK2-XH2tPxQilr5z5Ba8aS/view?usp=sharing" target="_blank" class="podcast-link">🎙️</a>            </tr>
+            <tr>
+              <td>7</td>
+              <td>Recurrent Neural Networks and Long Short-Term Memory (LSTM)</td>
+              <td>
+                <a href="https://drive.google.com/file/d/1kZhedq3vGm5CtKYUqXDsjB7U8W0rObWZ/view?usp=sharing" target="_blank" class="note-link">📝</a>
+                <a href="https://drive.google.com/file/d/1F8fhS6ORUM-zU2JUQmAmgoOKoCXqu4lc/view?usp=sharing" target="_blank" class="podcast-link">🎙️</a>            </tr>
+            <tr>
+              <td>8</td>
+              <td>Attention Mechanism and Transformer</td>
+              <td>
+                <a href="https://drive.google.com/file/d/1pm4RgSIdbK4rag5znJPkixTRy3t04MSA/view?usp=sharing" target="_blank" class="note-link">📝</a>
+                <a href="https://drive.google.com/file/d/1NVB3E_MPGsNmHFks16wlM-kvdERNJ5Gz/view?usp=sharing" target="_blank" class="podcast-link">🎙️</a>            </tr>
+            <tr>
+              <td>9</td>
+              <td>Natural Language Processing in Finance</td>
+              <td>
+                <a href="https://drive.google.com/file/d/1jafeKgKHsAFdx83AGI1pgsmP90yw2drl/view?usp=sharing" target="_blank" class="note-link">📝</a>
+                <a href="https://drive.google.com/file/d/1jMMcBElhZ3p1sFW5F8ONr33h3Ddux_B2/view?usp=sharing" target="_blank" class="podcast-link">🎙️</a>            </tr>
+          </table>
+        </div>
+      </div>
+      
+      <div class="module-section" style="border-bottom: none;">
+        <div class="module-content">
+          <h3>Generative AI</h3>
+          
+          <table class="week-table">
+            <tr>
+              <th>Week</th>
+              <th>Topic</th>
+              <th>Materials</th>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Introduction to Large Language Models</td>
+              <td>
+                <a href="https://drive.google.com/file/d/1w8QnR3FtzEC-wQ18fWEur5wLBZ9AhXl1/view?usp=sharing" target="_blank" class="note-link">📝</a>
+                <a href="https://drive.google.com/file/d/1ZSoXtBc--aN00pcKq71f_NERWEkDeXEE/view?usp=sharing" target="_blank" class="podcast-link">🎙️</a>            </tr>
+            <tr>
+              <td>11</td>
+              <td>Prompt Engineering, Retrieval Augmented Generation, and Fine-Tuning</td>
+              <td>
+                <a href="https://drive.google.com/file/d/1qGYt50W9J-vBzUe-uXzhGRSaqezYd5UE/view?usp=sharing" target="_blank" class="note-link">📝</a>
+                <a href="https://drive.google.com/file/d/1xQB6Fgp4quRZrSHmAER7nrd5rPEswk2W/view?usp=sharing" target="_blank" class="podcast-link">🎙️</a>            </tr>
+            <tr>
+              <td>12</td>
+              <td>LLM Agent and Agent Workflow</td>
+              <td>
+                <a href="https://drive.google.com/file/d/14tFGlBdBLhYMRLgRLFWmbSp7sE5tutK8/view?usp=sharing" target="_blank" class="note-link">📝</a>
+                <a href="https://drive.google.com/file/d/1W24acbJ0UJhB56xmWqKwbKFJRpThZux5/view?usp=sharing" target="_blank" class="podcast-link">🎙️</a>            
+              </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="textbook-section">
+      <h2>Textbooks</h2>
+      <div class="textbook-grid">
+        <div class="textbook-card">
+          <img src="images/dl_ian.jpg" alt="Deep Learning" class="textbook-cover">
+          <div class="textbook-info">
+            <h3>Deep Learning</h3>
+            <p>Ian Goodfellow, Yoshua Bengio, and Aaron Courville</p>
+            <p>MIT Press, 2016</p>
+            <a href="https://www.deeplearningbook.org/" class="textbook-link" target="_blank">Visit Website</a>
+          </div>
+        </div>
+        <div class="textbook-card">
+          <img src="images/d2l.jpg" alt="Dive into Deep Learning" class="textbook-cover">
+
+          <div class="textbook-info">
+            <h3>Dive into Deep Learning</h3>
+            <p>Aston Zhang, Zach C. Lipton, Mu Li, and Alex J. Smola</p>
+            <p>Cambridge University Press, 2023</p>
+            <a href="https://d2l.ai/" class="textbook-link" target="_blank">Visit Website</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="resources-section">
+      <h2>Useful Resources</h2>
+      <div class="tag-filter">
+        <div class="tag active" data-tag="all">All</div>
+        <div class="tag" data-tag="repository">Repository</div>
+        <div class="tag" data-tag="course">Course</div>
+        <div class="tag" data-tag="book">Book</div>
+        <div class="tag" data-tag="tutorial">Tutorial</div>
+        <div class="tag" data-tag="youtube">YouTube</div>
+        <div class="tag" data-tag="visualization">Visualization</div>
+      </div>
+      
+      <div class="resource-list">
+        <div class="resource-item" data-tags="repository,course">
+          <a href="https://github.com/rphilipzhang/AI-PhD-S25" target="_blank">AI for Business Research (Spring 2025) - CUHK - Philip Zhang</a>
+          <div class="resource-tags">
+            <span class="resource-tag">repository</span>
+            <span class="resource-tag">course materials</span>
+          </div>
+        </div>
+
+        <div class="resource-item" data-tags="repository,course">
+            <a href="https://github.com/rphilipzhang/AI-PhD-S24" target="_blank">AI for Business Research (Spring 2024) - CUHK - Philip Zhang</a>
+            <div class="resource-tags">
+              <span class="resource-tag">repository</span>
+              <span class="resource-tag">course materials</span>
+            </div>
+          </div>
+
+        <div class="resource-item" data-tags="course">
+          <a href="https://speech.ee.ntu.edu.tw/~hylee/ml/2021-spring.php" target="_blank">Machine Learning (2021 Spring) - NTU - Hung-Yi Lee</a>
+          <div class="resource-tags">
+            <span class="resource-tag">course</span>
+            <span class="resource-tag">machine learning</span>
+          </div>
+        </div>
+
+        <div class="resource-item" data-tags="course">
+          <a href="https://web.stanford.edu/class/cs224n/" target="_blank">CS224N Natural Language Processing with Deep Learning - Stanford</a>
+          <div class="resource-tags">
+            <span class="resource-tag">course</span>
+            <span class="resource-tag">nlp</span>
+          </div>
+        </div>
+
+        <div class="resource-item" data-tags="course">
+          <a href="https://cs231n.stanford.edu/" target="_blank">CS231N Deep Learning for Computer Vision - Stanford</a>
+          <div class="resource-tags">
+            <span class="resource-tag">course</span>
+            <span class="resource-tag">computer vision</span>
+          </div>
+        </div>
+
+        <div class="resource-item" data-tags="course">
+          <a href="https://www.leobix.us/genai" target="_blank">Generative AI - Léonard Boussioux</a>
+          <div class="resource-tags">
+            <span class="resource-tag">course</span>
+            <span class="resource-tag">generative ai</span>
+          </div>
+        </div>
+
+        <div class="resource-item" data-tags="course">
+          <a href="https://cmu-llms.org/" target="_blank">Large Language Models (Fall 2024) - CMU</a>
+          <div class="resource-tags">
+            <span class="resource-tag">course</span>
+            <span class="resource-tag">llm</span>
+          </div>
+        </div>
+
+        <div class="resource-item" data-tags="course">
+          <a href="https://www.cs.princeton.edu/courses/archive/fall22/cos597G/" target="_blank">Understanding Large Language Models (Fall 2022) - Princeton - Danqi Chen</a>
+          <div class="resource-tags">
+            <span class="resource-tag">course</span>
+            <span class="resource-tag">llm</span>
+          </div>
+        </div>
+
+        <div class="resource-item" data-tags="course">
+          <a href="https://rycolab.io/classes/llm-s24/" target="_blank">Large Language Models (Spring 2024) - ETH Zürich</a>
+          <div class="resource-tags">
+            <span class="resource-tag">course</span>
+            <span class="resource-tag">llm</span>
+          </div>
+        </div>
+
+        <div class="resource-item" data-tags="book">
+          <a href="https://d2l.ai/" target="_blank">Dive into Deep Learning</a>
+          <div class="resource-tags">
+            <span class="resource-tag">book</span>
+            <span class="resource-tag">deep learning</span>
+            <span class="resource-tag">tutorial</span>
+          </div>
+        </div>
+
+        <div class="resource-item" data-tags="youtube,tutorial">
+          <a href="https://www.youtube.com/@AndrejKarpathy" target="_blank">Andrej Karpathy YouTube Channel</a>
+          <div class="resource-tags">
+            <span class="resource-tag">youtube</span>
+            <span class="resource-tag">tutorial</span>
+            <span class="resource-tag">deep learning</span>
+          </div>
+        </div>
+
+        <div class="resource-item" data-tags="visualization">
+          <a href="https://distill.pub/2019/memorization-in-rnns/" target="_blank">Visualizing Memorization in RNNs - Distill</a>
+          <div class="resource-tags">
+            <span class="resource-tag">visualization</span>
+            <span class="resource-tag">rnn</span>
+          </div>
+        </div>
+
+        <div class="resource-item" data-tags="visualization">
+          <a href="https://bbycroft.net/llm" target="_blank">LLM Visualization - Ben Bycroft</a>
+          <div class="resource-tags">
+            <span class="resource-tag">visualization</span>
+            <span class="resource-tag">llm</span>
+          </div>
+        </div>
+
+        <div class="resource-item" data-tags="visualization">
+          <a href="https://playground.tensorflow.org/" target="_blank">Neural Network Playground - TensorFlow</a>
+          <div class="resource-tags">
+            <span class="resource-tag">visualization</span>
+            <span class="resource-tag">neural network</span>
+          </div>
+        </div>
+
+        <div class="resource-item" data-tags="visualization">
+          <a href="https://poloclub.github.io/cnn-explainer/" target="_blank">Convolutional Neural Network Explainer</a>
+          <div class="resource-tags">
+            <span class="resource-tag">visualization</span>
+            <span class="resource-tag">cnn</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Stevens Institute of Technology</p>
+    <p class="disclaimer">
+      This site is publicly accessible and is for educational purposes only.
+    </p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const navUl = document.querySelector('#mainNav ul');
+      navUl.classList.toggle('active');
+    }
+    
+    // Resource filtering functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const tagButtons = document.querySelectorAll('.tag');
+      const resourceItems = document.querySelectorAll('.resource-item');
+      
+      tagButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Update active tag
+          tagButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          
+          const selectedTag = this.getAttribute('data-tag');
+          
+          // Filter resources
+          resourceItems.forEach(item => {
+            if (selectedTag === 'all' || item.getAttribute('data-tags').includes(selectedTag)) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
