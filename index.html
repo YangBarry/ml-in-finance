@@ -196,8 +196,20 @@
       padding: 2em;
       box-shadow: 0 4px 20px rgba(0,0,0,0.05);
       align-items: center;
+      margin-bottom: 3em;  
+    }
+
+    /* ChatBot Section */
+    .chatbot-section {
+      grid-template-columns: 1fr auto;
+      margin-bottom: 3em;  
     }
     
+    .instructor-highlight a {
+      display: block;
+      text-decoration: none;
+    }
+
     .instructor-highlight img {
       width: 180px;
       border-radius: 50%;  /* Changed from 12px to 50% for circular shape */
@@ -322,13 +334,27 @@
     </section>
 
     <section class="instructor-highlight">
-      <img src="images/lecturer.png" alt="Dr. Zonghao Yang" />
+      <a href="https://sites.google.com/view/zonghaoyang/home" target="_blank">
+        <img src="images/instructor.png" alt="Dr. Zonghao Yang" />
+      </a>
       <div class="instructor-info">
         <h3>Meet Your Instructor</h3>
         <p>
           Dr. Zonghao Yang is a Tenure-Track Assistant Professor in FinTech at Stevens Institute of Technology's School of Business. With a PhD in Data Science from the City University of Hong Kong, his research focuses on financial technology and applied machine learning.
         </p>
       </div>
+    </section>
+
+    <section class="instructor-highlight chatbot-section">
+      <div class="instructor-info">
+        <h3>Chat with FA690 ChatBot</h3>
+        <p>
+          FA690 ChatBot is a customized GPT designed to help answer questions related to FA690 Machine Learning in Finance. The responses may occasionally be incorrect; always verify answers with official course materials (e.g., syllabus).        
+        </p>
+      </div>
+      <a href="https://chatgpt.com/g/g-680a45c3245081918b3bf9d92b5d3247-fa690-chatbot" target="_blank">
+        <img src="images/lecturer.png" alt="FA690 ChatBot" />
+      </a>
     </section>
   
     <section class="video-section">
